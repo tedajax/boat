@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class ModifyBoatMesh
 {
-    private Transform boatTx;
+    private Transform boatTransform;
     Vector3[] boatVertices;
     int[] boatTriangles;
 
@@ -14,7 +14,7 @@ public class ModifyBoatMesh
 
     public ModifyBoatMesh(GameObject gameObject)
     {
-        boatTx = gameObject.transform;
+        boatTransform = gameObject.transform;
 
         boatVertices = gameObject.GetComponent<MeshFilter>().mesh.vertices;
         boatTriangles = gameObject.GetComponent<MeshFilter>().mesh.triangles;
@@ -29,7 +29,7 @@ public class ModifyBoatMesh
 
         for (int i = 0; i < boatVertices.Length; ++i)
         {
-            Vector3 globalPos = boatTx.TransformPoint(boatVertices[i]);
+            Vector3 globalPos = boatTransform.TransformPoint(boatVertices[i]);
 
             boatVerticesGlobal[i] = globalPos;
 
@@ -192,9 +192,9 @@ public class ModifyBoatMesh
 
         for (int i = 0; i < underWaterTriangleData.Count; ++i)
         {
-            Vector3 p1 = boatTx.InverseTransformPoint(underWaterTriangleData[i].p1);
-            Vector3 p2 = boatTx.InverseTransformPoint(underWaterTriangleData[i].p2);
-            Vector3 p3 = boatTx.InverseTransformPoint(underWaterTriangleData[i].p3);
+            Vector3 p1 = boatTransform.InverseTransformPoint(underWaterTriangleData[i].p1);
+            Vector3 p2 = boatTransform.InverseTransformPoint(underWaterTriangleData[i].p2);
+            Vector3 p3 = boatTransform.InverseTransformPoint(underWaterTriangleData[i].p3);
 
             vertices.Add(p1);
             triangles.Add(vertices.Count - 1);

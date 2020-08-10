@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class BoatPhysics : MonoBehaviour
 {
+    public GameObject colliderObject;
     public GameObject underWaterObj;
 
     private ModifyBoatMesh modifyBoatMesh;
@@ -18,7 +19,7 @@ public class BoatPhysics : MonoBehaviour
     {
         boatRigidBody = GetComponent<Rigidbody>();
 
-        modifyBoatMesh = new ModifyBoatMesh(gameObject);
+        modifyBoatMesh = new ModifyBoatMesh((colliderObject == null) ? gameObject : colliderObject);
 
         underWaterMesh = underWaterObj.GetComponent<MeshFilter>().mesh;
     }
